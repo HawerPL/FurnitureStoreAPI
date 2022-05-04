@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController()
-@RequestMapping("Categories")
-public class CategoriesController {
+@RequestMapping("Category")
+public class CategoryController {
 
     List<Category> categories = new ArrayList<>();
 
-    public CategoriesController(){
+    public CategoryController(){
         Category category0 = new Category();
             category0.setId(0);
             category0.setName("Łazienka");
@@ -29,6 +29,7 @@ public class CategoriesController {
             category2.setName("Kuchnia");
             category2.setDescription("TEST 2");
 
+
         categories.add(category0);
         categories.add(category1);
         categories.add(category2);
@@ -39,12 +40,23 @@ public class CategoriesController {
         return ResponseEntity.ok(categories);
     }
 
-    @DeleteMapping()
-    public ResponseEntity<String> Delete(@RequestParam(value = "id") int id){
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Category> Get(@PathVariable int id) {
 
-        //Usuwa po id elementu listy
+        Category category = categories.stream()
+                .filter(x -> x.Id == id).findFirst().orElse(null);
 
-        categories.remove(id);
+        return ResponseEntity.ok(category);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> Delete(@PathVariable int id){
+
+        Category category = categories.stream()
+                .filter(x -> x.Id == id).findFirst().orElse(null);
+
+        categories.remove(category);
+
         return ResponseEntity.ok("Category was deleted successfully");
     }
 
