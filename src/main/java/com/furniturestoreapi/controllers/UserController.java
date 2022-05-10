@@ -15,21 +15,30 @@ public class UserController {
     public UserController(){
         User user0 = new User();
         user0.setId(0);
-        user0.setNick("Hawer");
+        user0.setLogin("Hawer");
+        user0.setName("Hubert");
+        user0.setSurname("Sobczyński");
         user0.setEmail("hawer123@gmail.com");
-        user0.setPassword("KochamKotki123");
+        user0.setRole("admin");
+        user0.setToken("KochamKotki123");
 
         User user1 = new User();
         user1.setId(1);
-        user1.setNick("Dorad");
+        user1.setLogin("Dorad");
+        user1.setName("Dominik");
+        user1.setSurname("Radziszewski");
         user1.setEmail("dorad123@gmail.com");
-        user1.setPassword("KochamPieski123");
+        user1.setRole("admin");
+        user1.setToken("KochamPieski123");
 
         User user2 = new User();
         user2.setId(1);
-        user2.setNick("Test");
-        user2.setEmail("test123@gmail.com");
-        user2.setPassword("KochamKroliczki123");
+        user1.setLogin("Test");
+        user1.setName("Imie");
+        user1.setSurname("Nazwisko");
+        user1.setEmail("test123@gmail.com");
+        user1.setRole("moderator");
+        user1.setToken("KochamKroliki123");
 
 
         users.add(user0);
