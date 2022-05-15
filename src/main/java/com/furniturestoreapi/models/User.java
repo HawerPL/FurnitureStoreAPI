@@ -20,7 +20,7 @@ public class User {
     public String Email;
 
     @JsonProperty("role")
-    public String Role;
+    public Enums.Role role;
 
     @JsonProperty("token")
     public String Token;
@@ -45,11 +45,15 @@ public class User {
 
     public void setEmail(String email) {Email = email;}
 
-    public String getRole() {return Role;}
-
-    public void setRole(String role) {Role = role;}
-
     public String getToken() {return Token;}
 
     public void setToken(String token) {Token = token;}
+
+    public Enums.Role getRole() {
+        return role;
+    }
+
+    public void setRole(Enums.Role role) {
+        this.role = role;
+    }
 }

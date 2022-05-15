@@ -1,6 +1,7 @@
 package com.furniturestoreapi.controllers;
 
 
+import com.furniturestoreapi.models.Enums;
 import com.furniturestoreapi.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController()
 @RequestMapping("User")
 public class UserController {
+
     List<User> users = new ArrayList<>();
 
     public UserController(){
@@ -20,7 +22,7 @@ public class UserController {
         user0.setName("Hubert");
         user0.setSurname("Sobczyński");
         user0.setEmail("hawer123@gmail.com");
-        user0.setRole("admin");
+        user0.setRole(Enums.Role.ADMIN);
         user0.setToken("KochamKotki123");
 
         User user1 = new User();
@@ -29,18 +31,17 @@ public class UserController {
         user1.setName("Dominik");
         user1.setSurname("Radziszewski");
         user1.setEmail("dorad123@gmail.com");
-        user1.setRole("admin");
+        user1.setRole(Enums.Role.ADMIN);
         user1.setToken("KochamPieski123");
 
         User user2 = new User();
-        user2.setId(1);
-        user1.setLogin("Test");
-        user1.setName("Imie");
-        user1.setSurname("Nazwisko");
-        user1.setEmail("test123@gmail.com");
-        user1.setRole("moderator");
-        user1.setToken("KochamKroliki123");
-
+        user2.setId(2);
+        user2.setLogin("Test");
+        user2.setName("Imie");
+        user2.setSurname("Nazwisko");
+        user2.setEmail("test123@gmail.com");
+        user2.setRole(Enums.Role.MODERATOR);
+        user2.setToken("KochamKroliki123");
 
         users.add(user0);
         users.add(user1);

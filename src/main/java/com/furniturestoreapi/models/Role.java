@@ -7,15 +7,20 @@ public class Role {
     @JsonProperty("id")
     public int Id;
 
-    public Enums.Rola Rola;
+    @JsonProperty("role")
+    public Enums.Role Rola;
 
     public int getId() {return Id;}
 
     public void setId(int id) {Id = id;}
 
-    public Enums.Rola getRola() {return Rola;}
+    public Enums.Role getRola() {
+        return Rola;
+    }
 
-    public void setRola(Enums.Rola rola) {Rola = rola;}
+    public void setRola(Enums.Role rola) {
+        Rola = rola;
+    }
 }
 
 
