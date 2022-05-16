@@ -1,72 +1,66 @@
 package com.furniturestoreapi.controllers;
 
+import com.furniturestoreapi.accessingDataJPA.CategoryRepository;
+import com.furniturestoreapi.accessingDataJPA.ProductRepository;
 import com.furniturestoreapi.models.Category;
 import com.furniturestoreapi.models.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController()
 @RequestMapping("Product")
 public class ProductController {
 
-    List<Product> products = new ArrayList<>();
+    ProductRepository productRepository;
+    CategoryRepository categoryRepository;
 
-    public ProductController(){
-        Product product0 = new Product();
-        product0.setId(0);
-        product0.setName("Szafka wisząca");
-        product0.setDescription("To jest długi opis szafki wiszącej.");
-        product0.setHeader("Szafka wisząca");
+    public ProductController(ProductRepository repository, CategoryRepository catRepository){
+        this.productRepository = repository;
+        this.categoryRepository = catRepository;
+        /*
+        Category category0 =
+        Category category1 = new Category("Kuchnia");
 
-        Product product1 = new Product();
-        product1.setId(1);
-        product1.setName("Narożnik");
-        product1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet placerat metus. Sed porta neque lacus, ac iaculis dolor faucibus id. Fusce rutrum gravida libero id rutrum. Ut diam urna, feugiat vitae varius vitae, dignissim consectetur eros.");
-        product1.setHeader("Narożnik");
+        Set<Category> categories = new HashSet();
+        categories.add(category0);
+        categories.add(category1);*/
 
-        Product product2 = new Product();
-        product2.setId(2);
-        product2.setName("Półka");
-        product2.setDescription("Nam lobortis orci a elit molestie maximus. Curabitur erat dolor, bibendum sed pretium in, ultricies vitae purus. Vestibulum in risus a dolor fermentum fermentum et eu est. Ut a mi mollis erat laoreet facilisis eu nec elit. Sed a turpis quam. Nam suscipit arcu eu neque porta, in accumsan quam semper.");
-        product2.setHeader("Półk");
+        Product product0 = new Product("Szafka wisząca", "To jest długi opis szafki wiszącej.", "Szafka wisząca", null);
+        Product product1 = new Product("Narożnik", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet placerat metus. Sed porta neque lacus, ac iaculis dolor faucibus id. Fusce rutrum gravida libero id rutrum. Ut diam urna, feugiat vitae varius vitae, dignissim consectetur eros.", "Narożnik", null);
+        Product product2 = new Product("Półka", "Nam lobortis orci a elit molestie maximus. Curabitur erat dolor, bibendum sed pretium in, ultricies vitae purus. Vestibulum in risus a dolor fermentum fermentum et eu est. Ut a mi mollis erat laoreet facilisis eu nec elit. Sed a turpis quam. Nam suscipit arcu eu neque porta, in accumsan quam semper.","Półk", null);
 
-
-        products.add(product0);
-        products.add(product1);
-        products.add(product2);
+        if(productRepository.count() == 0){
+            productRepository.save(product0);
+            productRepository.save(product1);
+            productRepository.save(product2);
+        }
     }
 
     @GetMapping()
-    public ResponseEntity<List<Product>> Get(){
-        return ResponseEntity.ok(products);
+    public ResponseEntity<Iterable<Product>> Get(){
+        return ResponseEntity.ok(productRepository.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Product> Get(@PathVariable int id) {
+    public ResponseEntity<Optional<Product>> Get(@PathVariable Long id) {
 
-        Product Product = products.stream()
-                .filter(x -> x.Id == id).findFirst().orElse(null);
-
-        return ResponseEntity.ok(Product);
+        return ResponseEntity.ok(productRepository.findById(id));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> Delete(@PathVariable int id){
+    public ResponseEntity<String> Delete(@PathVariable Long id){
 
-        Product Product = products.stream()
-                .filter(x -> x.Id == id).findFirst().orElse(null);
-
-        products.remove(Product);
+        productRepository.deleteById(id);
 
         return ResponseEntity.ok("Product was deleted successfully");
     }
 
     @PostMapping()
-    public ResponseEntity<String> Add(@RequestBody Product Product){
-        products.add(Product);
+    public ResponseEntity<String> Add(@RequestBody Product product){
+        productRepository.save(product);
         return ResponseEntity.ok("Product was added successfully");
     }
 

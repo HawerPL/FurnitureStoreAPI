@@ -2,25 +2,56 @@ package com.furniturestoreapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name = "products", schema = "fs_main")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("id")
-    public int Id;
+    @Column(name = "p_id")
+    private Long Id;
 
     @JsonProperty("name")
-    public String Name;
+    @Column(name = "p_name")
+    private String Name;
 
     @JsonProperty("description")
-    public String Description;
+    @Column(name = "p_description")
+    private String Description;
 
     @JsonProperty("header")
-    public String Header;
+    @Column(name = "p_header")
+    private String Header;
 
-    public int getId() {
+    @OneToMany//(mappedBy="category")
+    @JsonProperty("categories")
+    private Set<Category> Categories;
+
+    protected Product() {}
+
+    public Product(String name, String description, String header, Set<Category> categories){
+        this.Name = name;
+        this.Description = description;
+        this.Header = header;
+        this.Categories = categories;
+    }
+
+/*    public Product(String name, String description, String header){
+        this.Name = name;
+        this.Description = description;
+        this.Header = header;
+    }*/
+
+    public Long getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         Id = id;
     }
 
@@ -46,5 +77,13 @@ public class Product {
 
     public void setHeader(String header) {
         Header = header;
+    }
+
+    public Set<Category> getCategories() {
+        return Categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        Categories = categories;
     }
 }
