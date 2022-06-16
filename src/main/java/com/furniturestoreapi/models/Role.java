@@ -8,18 +8,18 @@ public class Role {
     public int Id;
 
     @JsonProperty("role")
-    public Enums.Role Rola;
+    public Enums.Role Role;
 
     public int getId() {return Id;}
 
     public void setId(int id) {Id = id;}
 
     public Enums.Role getRola() {
-        return Rola;
+        return Role;
     }
 
     public void setRola(Enums.Role rola) {
-        Rola = rola;
+        Role = rola;
     }
 }
 

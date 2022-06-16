@@ -1,9 +1,9 @@
 package com.furniturestoreapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
     @Column(name = "p_id")
     private Long Id;
@@ -28,7 +28,7 @@ public class Product {
     @Column(name = "p_header")
     private String Header;
 
-    @OneToMany//(mappedBy="category")
+    @ManyToMany()//(mappedBy="category")
     @JsonProperty("categories")
     private Set<Category> Categories;
 

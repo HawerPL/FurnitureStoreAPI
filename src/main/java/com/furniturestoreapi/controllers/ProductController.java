@@ -2,9 +2,8 @@ package com.furniturestoreapi.controllers;
 
 import com.furniturestoreapi.accessingDataJPA.CategoryRepository;
 import com.furniturestoreapi.accessingDataJPA.ProductRepository;
-import com.furniturestoreapi.models.Category;
+import com.furniturestoreapi.models.Message;
 import com.furniturestoreapi.models.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,17 +50,21 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> Delete(@PathVariable Long id){
+    public ResponseEntity<Message> Delete(@PathVariable Long id){
 
         productRepository.deleteById(id);
+        Message message = new Message("Product was deleted successfully");
 
-        return ResponseEntity.ok("Product was deleted successfully");
+        return ResponseEntity.ok(message);
     }
 
     @PostMapping()
-    public ResponseEntity<String> Add(@RequestBody Product product){
+    public ResponseEntity<Message> Add(@RequestBody Product product){
+
         productRepository.save(product);
-        return ResponseEntity.ok("Product was added successfully");
+        Message message = new Message("Product was added successfully");
+
+        return ResponseEntity.ok(message);
     }
 
 }

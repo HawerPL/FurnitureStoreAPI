@@ -1,8 +1,12 @@
 package com.furniturestoreapi.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.furniturestoreapi.accessingDataJPA.CategoryRepository;
 import com.furniturestoreapi.models.Category;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.furniturestoreapi.models.Message;
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,18 +42,21 @@ public class CategoryController {
         return ResponseEntity.ok(categoryRepository.findById(id));
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> Delete(@PathVariable Long id){
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Message> Delete(@PathVariable Long id){
 
         categoryRepository.deleteById(id);
+        Message message = new Message("Category was deleted successfully");
 
-        return ResponseEntity.ok("Category was deleted successfully");
+        return ResponseEntity.ok(message);
     }
 
     @PostMapping()
-    public ResponseEntity<String> Add(@RequestBody Category category){
+    public ResponseEntity<Message> Add(@RequestBody Category category){
         categoryRepository.save(category);
-        return ResponseEntity.ok("Category was added successfully");
+
+        Message message = new Message("Category was added successfully");
+        return ResponseEntity.ok(message);
     }
 
 }

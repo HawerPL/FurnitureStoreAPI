@@ -19,6 +19,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().anonymous()
                 .and()
                 .csrf()
-                .disable();
+                .disable()
+                .cors().disable();
     }
 }
