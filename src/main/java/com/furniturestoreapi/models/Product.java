@@ -1,7 +1,6 @@
 package com.furniturestoreapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
 import java.util.Set;
