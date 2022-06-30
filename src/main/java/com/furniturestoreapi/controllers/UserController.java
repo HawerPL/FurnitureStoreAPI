@@ -1,81 +1,81 @@
 package com.furniturestoreapi.controllers;
 
 
+import com.furniturestoreapi.accessingDataJPA.UserRepository;
 import com.furniturestoreapi.models.Enums;
+import com.furniturestoreapi.models.Message;
 import com.furniturestoreapi.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @RestController()
 @RequestMapping("User")
 public class UserController {
 
-    List<User> users = new ArrayList<>();
+    UserRepository userRepository;
 
-    public UserController(){
+    public UserController(UserRepository repository){
+        this.userRepository = repository;
+
+
         User user0 = new User();
-        user0.setId(0);
         user0.setLogin("Hawer");
         user0.setName("Hubert");
         user0.setSurname("Sobczyński");
         user0.setEmail("hawer123@gmail.com");
-        user0.setRole(Enums.Role.ADMIN);
+        //user0.setRole(Enums.Role.ADMIN);
         user0.setToken("KochamKotki123");
 
         User user1 = new User();
-        user1.setId(1);
         user1.setLogin("Dorad");
         user1.setName("Dominik");
         user1.setSurname("Radziszewski");
         user1.setEmail("dorad123@gmail.com");
-        user1.setRole(Enums.Role.ADMIN);
+        //user1.setRole(Enums.Role.ADMIN);
         user1.setToken("KochamPieski123");
 
         User user2 = new User();
-        user2.setId(2);
         user2.setLogin("Test");
         user2.setName("Imie");
         user2.setSurname("Nazwisko");
         user2.setEmail("test123@gmail.com");
-        user2.setRole(Enums.Role.MODERATOR);
+        //user2.setRole(Enums.Role.MODERATOR);
         user2.setToken("KochamKroliki123");
 
-        users.add(user0);
-        users.add(user1);
-        users.add(user2);
+        if(userRepository.count() == 0){
+            userRepository.save(user0);
+            userRepository.save(user1);
+            userRepository.save(user2);
+        }
     }
 
     @GetMapping()
-    public ResponseEntity<List<User>> Get(){
-        return ResponseEntity.ok(users);
+    public ResponseEntity<Iterable<User>> Get(){
+        return ResponseEntity.ok(userRepository.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> Get(@PathVariable int id) {
+    public ResponseEntity<Optional<User>> Get(@PathVariable Long id) {
 
-        User User = users.stream()
-                .filter(x -> x.Id == id).findFirst().orElse(null);
-
-        return ResponseEntity.ok(User);
+        return ResponseEntity.ok(userRepository.findById(id));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> Delete(@PathVariable int id){
+    public ResponseEntity<Message> Delete(@PathVariable Long id){
 
-        User User = users.stream()
-                .filter(x -> x.Id == id).findFirst().orElse(null);
+        userRepository.deleteById(id);
+        Message message = new Message("User was deleted successfully");
 
-        users.remove(User);
-
-        return ResponseEntity.ok("User was deleted successfully");
+        return ResponseEntity.ok(message);
     }
 
     @PostMapping()
-    public ResponseEntity<String> Add(@RequestBody User User){
-        users.add(User);
-        return ResponseEntity.ok("User was added successfully");
+    public ResponseEntity<Message> Add(@RequestBody User user){
+        userRepository.save(user);
+
+        Message message = new Message("User was added successfully");
+        return ResponseEntity.ok(message);
     }
 }
