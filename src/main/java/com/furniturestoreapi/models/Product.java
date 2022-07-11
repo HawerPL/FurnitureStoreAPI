@@ -27,6 +27,10 @@ public class Product {
     @Column(name = "p_header")
     private String Header;
 
+    @JsonProperty("image")
+    @Column(name = "p_image")
+    private byte[] image;
+
     @ManyToMany()//(mappedBy="category")
     @JsonProperty("categories")
     private Set<Category> Categories;

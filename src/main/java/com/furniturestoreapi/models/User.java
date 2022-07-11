@@ -12,65 +12,70 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
     @Column(name = "u_id")
-    public Long Id;
+    public Long id;
 
     @JsonProperty("login")
     @Column(name = "u_login")
-    public String Login;
+    public String login;
 
     @JsonProperty("name")
     @Column(name = "u_name")
-    public String Name;
+    public String name;
 
     @JsonProperty("surname")
     @Column(name = "u_surname")
-    public String Surname;
+    public String surname;
 
     @JsonProperty("email")
     @Column(name = "u_email")
-    public String Email;
+    public String email;
 
     @JsonProperty("role")
     @Column(name = "u_role")
     public Enums.Role role;
 
-    @JsonProperty("token")
-    @Column(name = "u_token")
-    public String Token;
+    @JsonProperty("password")
+    @Column(name = "u_password")
+    public String password;
 
-    public User(String login, String name, String surname, String email, Enums.Role role, String token) {
-        Login = login;
-        Name = name;
-        Surname = surname;
-        Email = email;
+    public User(String login, String name, String surname, String email, Enums.Role role, String password) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
         this.role = role;
-        Token = token;
+        this.password = password;
+    }
+
+    public User(String login, String password){
+        this.login = login;
+        this.password = password;
     }
 
     public User() {}
-    public Long getId() {return Id;}
+    public Long getId() {return id;}
 
-    public void setId(Long id) {Id = id;}
+    public void setId(Long id) {this.id = id;}
 
-    public String getLogin() {return Login;}
+    public String getLogin() {return login;}
 
-    public void setLogin(String login) {Login = login;}
+    public void setLogin(String login) {this.login = login;}
 
-    public String getName() {return Name;}
+    public String getName() {return name;}
 
-    public void setName(String name) {Name = name;}
+    public void setName(String name) {this.name = name;}
 
-    public String getSurname() {return Surname;}
+    public String getSurname() {return surname;}
 
-    public void setSurname(String surname) {Surname = surname;}
+    public void setSurname(String surname) {this.surname = surname;}
 
-    public String getEmail() {return Email;}
+    public String getEmail() {return email;}
 
-    public void setEmail(String email) {Email = email;}
+    public void setEmail(String email) {this.email = email;}
 
-    public String getToken() {return Token;}
+    public String getPassword() {return password;}
 
-    public void setToken(String token) {Token = token;}
+    public void setPassword(String password) {this.password = password;}
 
     public Enums.Role getRole() {
         return role;
