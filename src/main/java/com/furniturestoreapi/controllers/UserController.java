@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController()
 @RequestMapping("User")
+@CrossOrigin
 public class UserController {
 
     PasswordEncoder passwordEncoder =  new BCryptPasswordEncoder();
@@ -89,10 +90,13 @@ public class UserController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Message> Update(@PathVariable Long id, @RequestBody User user) throws Exception {
         Message message = new Message("");
+
+        user.setId(id);
+
         try {
-            if (userRepository.existsByLogin(user.getLogin()) && userRepository.findByLogin(user.getLogin()).getId() != user.getId()) {
-                throw new Exception("User with this login " + user.getLogin() + " already exists.");
-            }
+//            if (userRepository.existsByLogin(user.getLogin()) && userRepository.findByLogin(user.getLogin()).getId() != user.getId()) {
+//                throw new Exception("User with this login " + user.getLogin() + " already exists.");
+//            }
             user.setPassword(userRepository.getById(id).getPassword());
 
             if(userRepository.existsById(user.id)){

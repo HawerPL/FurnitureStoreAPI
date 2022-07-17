@@ -13,35 +13,37 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
     @Column(name = "p_id")
-    private Long Id;
+    private Long id;
 
     @JsonProperty("name")
     @Column(name = "p_name")
-    private String Name;
+    private String name;
 
     @JsonProperty("description")
     @Column(name = "p_description")
-    private String Description;
+    private String description;
 
     @JsonProperty("header")
     @Column(name = "p_header")
-    private String Header;
+    private String header;
 
     @JsonProperty("image")
     @Column(name = "p_image")
-    private byte[] image;
+    //private byte[] image;
+    private String image;
 
     @ManyToMany()//(mappedBy="category")
     @JsonProperty("categories")
-    private Set<Category> Categories;
+    private Set<Category> categories;
 
     protected Product() {}
 
-    public Product(String name, String description, String header, Set<Category> categories){
-        this.Name = name;
-        this.Description = description;
-        this.Header = header;
-        this.Categories = categories;
+    public Product(String name, String description, String header, Set<Category> categories, String image){
+        this.name = name;
+        this.description = description;
+        this.header = header;
+        this.categories = categories;
+        this.image = image;
     }
 
 /*    public Product(String name, String description, String header){
@@ -51,42 +53,50 @@ public class Product {
     }*/
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public String getHeader() {
-        return Header;
+        return header;
     }
 
     public void setHeader(String header) {
-        Header = header;
+        this.header = header;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Set<Category> getCategories() {
-        return Categories;
+        return categories;
     }
 
     public void setCategories(Set<Category> categories) {
-        Categories = categories;
+        this.categories = categories;
     }
 }

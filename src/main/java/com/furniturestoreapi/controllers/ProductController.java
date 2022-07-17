@@ -11,6 +11,7 @@ import java.util.*;
 
 @RestController()
 @RequestMapping("Product")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductController {
 
     ProductRepository productRepository;
@@ -27,9 +28,9 @@ public class ProductController {
         categories.add(category0);
         categories.add(category1);*/
 
-        Product product0 = new Product("Szafka wisząca", "To jest długi opis szafki wiszącej.", "Szafka wisząca", null);
-        Product product1 = new Product("Narożnik", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet placerat metus. Sed porta neque lacus, ac iaculis dolor faucibus id. Fusce rutrum gravida libero id rutrum. Ut diam urna, feugiat vitae varius vitae, dignissim consectetur eros.", "Narożnik", null);
-        Product product2 = new Product("Półka", "Nam lobortis orci a elit molestie maximus. Curabitur erat dolor, bibendum sed pretium in, ultricies vitae purus. Vestibulum in risus a dolor fermentum fermentum et eu est. Ut a mi mollis erat laoreet facilisis eu nec elit. Sed a turpis quam. Nam suscipit arcu eu neque porta, in accumsan quam semper.","Półk", null);
+        Product product0 = new Product("Szafka wisząca", "To jest długi opis szafki wiszącej.", "Szafka wisząca", null, "");
+        Product product1 = new Product("Narożnik", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet placerat metus. Sed porta neque lacus, ac iaculis dolor faucibus id. Fusce rutrum gravida libero id rutrum. Ut diam urna, feugiat vitae varius vitae, dignissim consectetur eros.", "Narożnik", null, "");
+        Product product2 = new Product("Półka", "Nam lobortis orci a elit molestie maximus. Curabitur erat dolor, bibendum sed pretium in, ultricies vitae purus. Vestibulum in risus a dolor fermentum fermentum et eu est. Ut a mi mollis erat laoreet facilisis eu nec elit. Sed a turpis quam. Nam suscipit arcu eu neque porta, in accumsan quam semper.","Półka", null, "");
 
         if(productRepository.count() == 0){
             productRepository.save(product0);

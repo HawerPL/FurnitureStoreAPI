@@ -6,6 +6,7 @@ import com.furniturestoreapi.models.JwtResponse;
 import com.furniturestoreapi.models.Message;
 import com.furniturestoreapi.services.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -41,7 +42,7 @@ public class JwtAuthenticationController {
             return ResponseEntity.ok(new JwtResponse(token));
         }
         catch(Exception e) {
-            return ResponseEntity.ok(new Message(e.getMessage()));
+            return new ResponseEntity<>(new Message(e.getMessage()), HttpStatus.FORBIDDEN);
         }
     }
 

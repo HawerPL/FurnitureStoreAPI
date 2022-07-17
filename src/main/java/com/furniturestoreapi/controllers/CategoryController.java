@@ -6,6 +6,7 @@ import com.furniturestoreapi.accessingDataJPA.CategoryRepository;
 import com.furniturestoreapi.models.Category;
 import com.furniturestoreapi.models.Message;
 import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController()
+@CrossOrigin()
 @RequestMapping("Category")
 public class CategoryController {
 

@@ -17,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 
 @Configuration
@@ -35,7 +36,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        //PasswordEncoder passwordEncoder =  new BCryptPasswordEncoder();
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
@@ -47,7 +47,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-//        http
+//        http.
 //                .authorizeRequests()
 //                .antMatchers("/").permitAll()
 //                .anyRequest().anonymous()
@@ -55,7 +55,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .csrf()
 //                .disable()
 //                .cors().disable();
-        
+
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll().and()
                 .authorizeRequests().antMatchers(HttpMethod.POST).authenticated().and()
