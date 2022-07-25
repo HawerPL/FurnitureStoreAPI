@@ -27,28 +27,28 @@ public class UserController {
 
 
         User user0 = new User();
-        user0.setLogin("Hawer");
-        user0.setName("Hubert");
-        user0.setSurname("Sobczyński");
-        user0.setEmail("hawer123@gmail.com");
+        user0.setLogin("serwis");
+        user0.setName("serwis");
+        user0.setSurname("serwis");
+        user0.setEmail("serwis@gmail.com");
         //user0.setRole(Enums.Role.ADMIN);
-        user0.setPassword(passwordEncoder.encode("test"));
+        user0.setPassword(passwordEncoder.encode("serwis"));
 
         User user1 = new User();
-        user1.setLogin("Dorad");
-        user1.setName("Dominik");
-        user1.setSurname("Radziszewski");
-        user1.setEmail("dorad123@gmail.com");
+        user1.setLogin("admin");
+        user1.setName("admin");
+        user1.setSurname("admin");
+        user1.setEmail("admin@gmail.com");
         //user1.setRole(Enums.Role.ADMIN);
-        user1.setPassword(passwordEncoder.encode("test123"));
+        user1.setPassword(passwordEncoder.encode("admin"));
 
         User user2 = new User();
         user2.setLogin("Test");
-        user2.setName("Imie");
-        user2.setSurname("Nazwisko");
+        user2.setName("Użytkownik");
+        user2.setSurname("Testowy");
         user2.setEmail("test123@gmail.com");
         //user2.setRole(Enums.Role.MODERATOR);
-        user2.setPassword(passwordEncoder.encode("Test"));
+        user2.setPassword(passwordEncoder.encode("test"));
 
         if(userRepository.count() == 0){
             userRepository.save(user0);
@@ -116,13 +116,11 @@ public class UserController {
     public ResponseEntity<Message> UpdatePassword(@PathVariable Long id, @RequestBody User user) throws Exception{
         Message message = new Message("");
         try {
-            if (user.getPassword().length() < 6) {
-                throw new Exception("Password is too short");
-            }
-            if(userRepository.existsById(user.id)){
-                userRepository.updatePassword(passwordEncoder.encode(user.getPassword()), user.getLogin());
-                message.setMessage("User's password was updated successfully");
-            }
+            userRepository.updatePassword(passwordEncoder.encode(user.getPassword()), user.getLogin());
+//            if(userRepository.existsById(user.id)){
+//                userRepository.updatePassword(passwordEncoder.encode(user.getPassword()), user.getLogin());
+//                message.setMessage("User's password was updated successfully");
+//            }
             return ResponseEntity.ok(message);
         } catch (Exception e) {
             message.setMessage(e.getMessage());
