@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @RestController()
 @RequestMapping("Section")
-@CrossOrigin
+@CrossOrigin()
 public class SectionController {
 
     SectionRepository sectionRepository;

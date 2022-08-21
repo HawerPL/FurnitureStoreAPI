@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController()
 @RequestMapping("User")
-@CrossOrigin
+@CrossOrigin()
 public class UserController {
 
     PasswordEncoder passwordEncoder =  new BCryptPasswordEncoder();

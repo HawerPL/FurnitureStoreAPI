@@ -1,9 +1,201 @@
-openapi: 3.0.3
+openapi: "3.0.3"
 info:
-  title: Title
-  description: Title
-  version: 1.0.0
+  title: "FurnitureStoreAPI API"
+  description: "FurnitureStoreAPI API"
+  version: "1.0.0"
 servers:
-  - url: 'https'
+  - url: "https://FurnitureStoreAPI"
 paths:
-  
+  /Category:
+    get:
+      summary: "GET Category"
+      operationId: "Get"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST Category"
+      operationId: "Add"
+      responses:
+        "200":
+          description: "OK"
+  /Category/{id}:
+    get:
+      summary: "GET Category/{id}"
+      operationId: "Get"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    delete:
+      summary: "DELETE Category/{id}"
+      operationId: "Delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+  /Product:
+    get:
+      summary: "GET Product"
+      operationId: "Get"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST Product"
+      operationId: "Add"
+      responses:
+        "200":
+          description: "OK"
+  /Product/{id}:
+    get:
+      summary: "GET Product/{id}"
+      operationId: "Get"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    delete:
+      summary: "DELETE Product/{id}"
+      operationId: "Delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+  /Section:
+    get:
+      summary: "GET Section"
+      operationId: "Get"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST Section"
+      operationId: "Add"
+      responses:
+        "200":
+          description: "OK"
+  /Section/{id}:
+    get:
+      summary: "GET Section/{id}"
+      operationId: "Get"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    delete:
+      summary: "DELETE Section/{id}"
+      operationId: "Delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+  /User:
+    get:
+      summary: "GET User"
+      operationId: "Get"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST User"
+      operationId: "Add"
+      responses:
+        "200":
+          description: "OK"
+  /User/{id}:
+    get:
+      summary: "GET User/{id}"
+      operationId: "Get"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    put:
+      summary: "PUT User/{id}"
+      operationId: "Update"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    patch:
+      summary: "PATCH User/{id}"
+      operationId: "UpdatePassword"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    delete:
+      summary: "DELETE User/{id}"
+      operationId: "Delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+  /authenticate:
+    post:
+      summary: "POST authenticate"
+      operationId: "createAuthenticationToken"
+      responses:
+        "200":
+          description: "OK"
